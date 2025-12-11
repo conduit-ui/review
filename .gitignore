@@ -1,0 +1,34 @@
+# Development
+.claude/
+.claude-plugin/local/
+*.local.json
+
+# Reviews directory (generated outputs)
+.claude/reviews/
+
+# Node
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+.tmp/

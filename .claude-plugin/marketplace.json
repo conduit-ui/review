@@ -1,0 +1,22 @@
+{
+  "name": "conduit-ui-marketplace",
+  "description": "Official Conduit UI plugins marketplace",
+  "owner": {
+    "name": "Jordan Partridge",
+    "email": "jordan@conduit-ui.com"
+  },
+  "plugins": [
+    {
+      "name": "review",
+      "description": "Comprehensive parallel PR review system with architecture and implementation analysis",
+      "version": "1.0.0",
+      "source": "https://github.com/conduit-ui/review.git",
+      "author": {
+        "name": "Jordan Partridge",
+        "email": "jordan@conduit-ui.com"
+      },
+      "homepage": "https://github.com/conduit-ui/review",
+      "license": "MIT"
+    }
+  ]
+}

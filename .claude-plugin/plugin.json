@@ -1,0 +1,57 @@
+{
+  "name": "review",
+  "description": "Parallel PR review system with AI-powered architecture and implementation analysis. Orchestrates simultaneous code reviews from architecture and implementation specialists, synthesizes findings into actionable briefs, and scores PR readiness for merge.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jordan Partridge",
+    "email": "jordan@conduit-ui.com"
+  },
+  "homepage": "https://github.com/conduit-ui/review",
+  "repository": "https://github.com/conduit-ui/review",
+  "license": "MIT",
+  "keywords": [
+    "code-review",
+    "pull-request",
+    "code-quality",
+    "architecture-review",
+    "security-scanning",
+    "coderabbit",
+    "automation",
+    "ai-agents"
+  ],
+  "capabilities": {
+    "agents": [
+      "pr-review-coordinator",
+      "architecture-reviewer",
+      "implementation-reviewer",
+      "commit-reviewer",
+      "checkpoint-analyzer"
+    ],
+    "commands": [
+      "review"
+    ],
+    "tools": [
+      "Bash",
+      "Read",
+      "Write",
+      "Glob",
+      "Grep",
+      "Task",
+      "TodoWrite",
+      "AgentOutputTool"
+    ]
+  },
+  "requirements": {
+    "coderabbit": {
+      "type": "external-tool",
+      "description": "CodeRabbit CLI for code analysis",
+      "required": true,
+      "installUrl": "https://coderabbit.ai/cli"
+    },
+    "git": {
+      "type": "system-tool",
+      "description": "Git for repository operations",
+      "required": true
+    }
+  }
+}
