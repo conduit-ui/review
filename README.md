@@ -53,7 +53,7 @@ Synthesis:
 ### pr-review-coordinator
 Orchestrates reviews and synthesizes findings into actionable briefs with readiness scoring.
 
-### architecture-reviewer (Jordan)
+### architecture-reviewer (OttBot)
 Deep Laravel architecture expert who analyzes:
 - Design patterns (Repository, Service, Action, Factory patterns)
 - SOLID principle compliance

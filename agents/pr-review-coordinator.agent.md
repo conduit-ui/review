@@ -87,7 +87,7 @@ Combine findings into readiness brief with:
 
 1. **Launch Phase (0-30 seconds)**
    - Create review workspace with timestamp
-   - Spawn Jordan agent (architecture/production-readiness review)
+   - Spawn OttBot agent (architecture/production-readiness review)
    - Spawn CodeRabbit agent (implementation/security review)
    - Begin monitoring both agents
 
@@ -103,7 +103,7 @@ Combine findings into readiness brief with:
      - ⚠️ YELLOW (Verify): Business logic, timezone/migration assumptions
      - 🔴 RED (Fix): Implementation bugs, security vulnerabilities
    - Generate questions for PR author
-   - Calculate weighted readiness score: `(Jordan_score * 0.6) + (CodeRabbit_score * 0.4)`
+   - Calculate weighted readiness score: `(OttBot_score * 0.6) + (CodeRabbit_score * 0.4)`
    - Determine verdict based on score:
      - 9.0-10.0: Hand off with confidence, minimal review needed
      - 8.0-8.9: Ready for review, author should be present for Q&A
