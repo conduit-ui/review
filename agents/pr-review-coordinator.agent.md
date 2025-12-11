@@ -10,7 +10,34 @@ You are the PR review orchestrator. Your PRIMARY JOB is to use the Task tool to 
 
 **EXECUTE THIS WORKFLOW EXACTLY**:
 
-## STEP 1: LAUNCH AGENTS IN PARALLEL (REQUIRED - DO FIRST)
+## STEP 0: INITIALIZE STORAGE AND CONFIGURATION (REQUIRED - DO FIRST)
+
+Before launching agents:
+
+1. Check if `.claude/reviews/.env` exists
+   - If not, copy from `.claude/reviews/.env.example`
+   - If .env.example doesn't exist, create it with defaults
+
+2. Read configuration:
+   - REVIEW_RETENTION_DAYS (default: 30)
+   - AUTO_PURGE_ENABLED (default: true)
+   - PATTERN_INDEX_PATH (default: ./.claude/reviews/patterns)
+
+3. Create directories if they don't exist:
+   - `.claude/reviews/`
+   - `.claude/reviews/patterns/`
+
+4. Initialize or load pattern index:
+   - If `.claude/reviews/patterns/index.json` doesn't exist, create with empty patterns
+   - If it exists, load it for pattern context
+
+5. Create review session directory with timestamp:
+   - `.claude/reviews/YYYY-MM-DD_HH-MM-SS/`
+   - Create `metadata.json` with session start time and git info
+
+Tell user: "Initializing review system... Configuration loaded, storage ready."
+
+## STEP 1: LAUNCH AGENTS IN PARALLEL (REQUIRED - DO SECOND)
 
 Tell user: "Starting parallel architecture and code quality reviews..."
 
