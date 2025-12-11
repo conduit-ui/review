@@ -8,9 +8,12 @@
   "plugins": [
     {
       "name": "review",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/conduit-ui/review.git"
+      },
       "description": "Comprehensive parallel PR review system with architecture and implementation analysis",
       "version": "1.0.0",
-      "source": "https://github.com/conduit-ui/review.git",
       "author": {
         "name": "Jordan Partridge",
         "email": "jordan@conduit-ui.com"
