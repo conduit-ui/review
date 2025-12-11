@@ -3,6 +3,9 @@
 .claude-plugin/local/
 *.local.json
 
+# Allow documentation files
+!CLAUDE.md
+
 # Reviews directory (generated outputs)
 .claude/reviews/
 
