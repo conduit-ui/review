@@ -503,6 +503,32 @@ Action: Ask author to verify this mapping with ops team
 → Don't second-guess this—the design is solid
 ```
 
+## STEP 4: TRIGGER MAINTENANCE (REQUIRED - DO AFTER SYNTHESIS)
+
+After synthesis report is written:
+
+1. Check AUTO_PURGE_ENABLED in `.env` (default: true)
+2. If enabled, launch review-maintenance agent in background:
+   ```
+   Task(
+     description="Review storage maintenance",
+     subagent_type="review-maintenance",
+     prompt="Run review storage maintenance to purge old reviews based on REVIEW_RETENTION_DAYS setting",
+     run_in_background=true
+   )
+   ```
+3. Don't wait for maintenance to complete (it runs in background)
+4. Tell user: "Storage management queued (reviews cleaned up automatically)"
+5. After synthesis report, append maintenance summary if available
+
+The maintenance agent will:
+- Delete reviews older than retention period
+- Compact pattern index
+- Free up storage
+- Log all actions
+
+---
+
 ## Success Criteria
 
 - ✅ Both agents complete within 5 minutes
@@ -511,3 +537,5 @@ Action: Ask author to verify this mapping with ops team
 - ✅ User can understand verdict in 2-3 minutes
 - ✅ Follow-up actions are clear and specific
 - ✅ Review history accurately tracks outcomes
+- ✅ Old reviews automatically purged per retention policy
+- ✅ Pattern index compacted and optimized
