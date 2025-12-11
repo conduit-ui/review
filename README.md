@@ -1,57 +1,89 @@
-# Code Review Agents
+# Laravel Code Review Agents
 
-Comprehensive parallel PR review system with AI-powered architecture and implementation analysis. Orchestrates specialized reviewer agents to assess code quality, security, and production readiness—then synthesizes findings into actionable briefs with confidence scoring.
+Expert Laravel PR review system with specialized agents for architecture assessment, test coverage analysis, and production-readiness validation. Emphasizes expressive, maintainable code and deep pattern recognition.
 
 ## Features
 
-✨ **Parallel Reviews** - Simultaneous architecture and implementation analysis (50% faster)
+🏗️ **Architecture Review** - Design patterns, SOLID principles, Laravel conventions
+🧪 **Test-Driven Assessment** - Test quality, coverage analysis, edge cases
+🎯 **Production Readiness** - Error handling, logging, performance implications
 📊 **Readiness Scoring** - Quantified PR readiness (0-10 scale)
-🎯 **Categorized Feedback** - GREEN/YELLOW/RED light classification
-🔍 **Security & Quality** - CodeRabbit integration + architecture validation
-📈 **Learning Loop** - Improves recommendations over time
+🔍 **Pattern Recognition** - Identifies anti-patterns and architectural concerns
 
 ## Quick Start
 
-### 1. Install Prerequisites
+### 1. Add Marketplace
 ```bash
-# CodeRabbit CLI
-brew install coderabbit
-
-# Git (usually pre-installed)
-git --version
+/plugin marketplace add conduit-ui/review
 ```
 
-### 2. Install Package
+### 2. Install Plugin
 ```bash
-# Via direct git installation
-/plugin install review@github:conduit-ui/review
+/plugin install review@conduit-ui-marketplace
 ```
 
 ### 3. Run Review
 ```bash
-# In your project with a PR
+# In your Laravel project
 /review
 
-# Results appear in .claude/reviews/[timestamp]/
+# Results in .claude/reviews/[timestamp]/synthesis-report.md
 ```
 
 ## How It Works
 
 ```
-Your PR
+Your Laravel PR
    ↓
-Parallel Review:
-├─ Architecture Assessment (design, patterns, test coverage)
-└─ Implementation Review (code quality, security, issues)
+Architecture Review:
+├─ Design patterns & SOLID compliance
+├─ Laravel convention adherence
+├─ Test quality and coverage
+├─ Production readiness
+└─ Performance implications
    ↓
-Synthesis Phase:
-├─ Categorize findings (RED/YELLOW/GREEN)
+Synthesis:
+├─ Categorize findings
 ├─ Calculate readiness score
 └─ Generate actionable brief
-   ↓
-Output:
-└─ .claude/reviews/[timestamp]/synthesis-report.md
 ```
+
+## Agents
+
+### pr-review-coordinator
+Orchestrates reviews and synthesizes findings into actionable briefs with readiness scoring.
+
+### architecture-reviewer (Jordan)
+Deep Laravel architecture expert who analyzes:
+- Design patterns (Repository, Service, Action, Factory patterns)
+- SOLID principle compliance
+- Test quality and test-driven design
+- Production readiness (error handling, logging, monitoring)
+- Performance implications (N+1 queries, eager loading, query optimization)
+- Database migrations and rollback safety
+- Code expressiveness and maintainability
+
+Focuses on:
+- **Clarity over cleverness** - code that's easy to understand
+- **Early returns** - reducing nesting for readability
+- **Expressive names** - descriptive variables and methods
+- **Test quality** - comprehensive edge case coverage
+- **Pattern correctness** - following established Laravel patterns
+
+### implementation-reviewer (Optional)
+Runs CodeRabbit analysis if installed. Focuses on:
+- Code quality and consistency
+- Security vulnerabilities
+- Implementation details
+
+### commit-reviewer
+Validates commits meet Laravel standards:
+- Test validation before commit
+- Message formatting
+- Conventional commit style
+
+### checkpoint-analyzer
+Verifies staged changes form working checkpoint before commit.
 
 ## Scoring
 
@@ -62,59 +94,60 @@ Output:
 | 7.0-7.9 | ⚠️ Ready but expect questions | May need iteration |
 | <7.0 | 🔴 Hold | Needs more work before merge |
 
-## Agents
-
-- **pr-review-coordinator** - Orchestrates parallel reviews
-- **architecture-reviewer** - Design patterns & production readiness
-- **implementation-reviewer** - Code quality, security, issues
-- **commit-reviewer** - Pre-commit validation
-- **checkpoint-analyzer** - Staged change verification
-
-## Documentation
-
-- [QUICKSTART.md](./docs/QUICKSTART.md) - 5-minute setup
-- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - How it works
-- [CUSTOMIZATION.md](./docs/CUSTOMIZATION.md) - Configure for your project
-- [SCORING-MODEL.md](./docs/SCORING-MODEL.md) - Score calculation
-- [EXAMPLES.md](./docs/EXAMPLES.md) - Language-specific examples
-
 ## Requirements
 
-- **CodeRabbit CLI** (required) - Install from https://coderabbit.ai/cli
 - **Git** (required)
-- **GitHub CLI** (optional) - For better PR integration
+- **CodeRabbit CLI** (optional) - for implementation review
+  - Install: `brew install coderabbit`
+  - Or skip for architecture-only review
+
+## Laravel-Specific Features
+
+### Understands Laravel Patterns
+- Service-Action-Data architecture
+- Query Builder and Eloquent patterns
+- Test conventions and assertions
+- Module-based organization
+- Permission and authorization patterns
+- Form Request validation
+- Pipeline and middleware patterns
+
+### Detects Common Issues
+- N+1 query problems
+- Missing eager loading
+- Untested edge cases
+- Database migration safety
+- Test fixture misuse
+- Silent failure patterns
+- Type safety gaps
+
+### Values Expressive Code
+- Clean, readable code over clever code
+- Early returns for readability
+- Descriptive variable/method names
+- Test-driven development
+- Explicit over implicit
+- Small, focused functions
 
 ## Configuration
 
-Create `.claude/review-config.json` to customize:
+Create `.claude/review-config.json`:
 
 ```json
 {
   "scoring": {
-    "architecture_weight": 0.6,
-    "implementation_weight": 0.4
+    "architecture_weight": 0.8,
+    "implementation_weight": 0.2
   },
   "review": {
     "enableLearning": true,
-    "reportDirectory": ".claude/reviews"
+    "reportDirectory": ".claude/reviews",
+    "coderabbitEnabled": false
   }
 }
 ```
 
-## Integration
-
-### GitHub Actions
-```yaml
-name: Code Review
-on: [pull_request]
-jobs:
-  review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: anthropics/claude-code@v1
-        with:
-          command: /review
-```
+## Workflow Integration
 
 ### Pre-commit Hook
 ```bash
@@ -125,15 +158,34 @@ if grep -q "RED LIGHTS" .claude/reviews/*/synthesis-report.md; then
 fi
 ```
 
-## Requirements
+### GitHub Actions
+```yaml
+name: Architecture Review
+on: [pull_request]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: anthropics/claude-code@v1
+        with:
+          command: /review
+```
 
-- **CodeRabbit CLI** - [Install](https://coderabbit.ai/cli)
-- **Git** - Usually pre-installed
-- **GitHub CLI** (optional) - [Install](https://cli.github.com)
+## What You Get
 
-## Support
+When you run `/review`, you receive:
 
-- 📖 Documentation: https://github.com/conduit-ui/review
+**synthesis-report.md** with:
+- Readiness score (0-10)
+- ✅ GREEN LIGHTS (trust these)
+- ⚠️ YELLOW LIGHTS (verify with author)
+- 🔴 RED LIGHTS (must fix)
+- Questions for author
+- Detailed findings by category
+
+## Support & Contributing
+
+- 📖 Source: https://github.com/conduit-ui/review
 - 🐛 Issues: https://github.com/conduit-ui/review/issues
 - 💬 Discussions: https://github.com/conduit-ui/review/discussions
 
@@ -141,4 +193,4 @@ fi
 
 MIT - See LICENSE file
 
-Built with ❤️ using Claude Code
+Built with ❤️ for Laravel developers using Claude Code
