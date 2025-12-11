@@ -18,40 +18,5 @@
     "pest",
     "phpunit",
     "production-readiness"
-  ],
-  "capabilities": {
-    "agents": [
-      "pr-review-coordinator",
-      "architecture-reviewer",
-      "implementation-reviewer",
-      "commit-reviewer",
-      "checkpoint-analyzer"
-    ],
-    "commands": [
-      "review"
-    ],
-    "tools": [
-      "Bash",
-      "Read",
-      "Write",
-      "Glob",
-      "Grep",
-      "Task",
-      "TodoWrite",
-      "AgentOutputTool"
-    ]
-  },
-  "requirements": {
-    "git": {
-      "type": "system-tool",
-      "description": "Git for repository operations",
-      "required": true
-    },
-    "coderabbit": {
-      "type": "external-tool",
-      "description": "CodeRabbit CLI for optional implementation review",
-      "required": false,
-      "installUrl": "https://coderabbit.ai/cli"
-    }
-  }
+  ]
 }
